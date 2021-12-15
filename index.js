@@ -14,28 +14,70 @@ function divide(a, b) {
   return a / b;
 }
 
-function operator(a, b, op) {
+function operate(a, b, op) {
   switch (op) {
     case "+":
-      return add(a, b);
+      display.innerHTML = add(a, b);
+      break;
     case "-":
-      return substract(a, b);
+      display.innerHTML = substract(a, b);
+      break;
     case "*":
-      return multiply(a, b);
+      display.innerHTML = multiply(a, b);
+      break;
     case "/":
-      return divide(a, b);
+      display.innerHTML = divide(a, b);
+      break;
   }
 }
 
-function clearDisplay(display) {
+function clearDisplay() {
   display.innerHTML = "";
+}
+
+function appendDisplay(display, number) {
+  display.innerHTML = display.innerHTML + number;
+}
+
+function appendNumber(number) {
+  number = parseInt(number);
+  equation.push(number);
+  clearDisplay();
+  console.log(equation);
+}
+
+function defineOperator(op) {
+  operator = op;
+  console.log(operator);
 }
 
 const display = document.getElementById("window");
 const btnClear = document.getElementById("clear");
+const numbers = document.getElementsByClassName("number");
+const operators = document.getElementsByClassName("operator");
+const equality = document.getElementById("equal");
+let equation = [];
+let operator;
 
-let display_arr = ["123"];
-display.innerHTML = display_arr[0];
-btnClear.addEventListener("click", () => clearDisplay(display));
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i].addEventListener("click", (e) => {
+    appendDisplay(display, e.target.innerHTML);
+  });
+}
 
-console.log(operator(20, 4, "/"));
+for (let i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", (e) => {
+    appendNumber(display.innerHTML);
+    defineOperator(e.target.innerHTML);
+  });
+}
+
+equality.addEventListener("click", () => {
+  operate(equation[0], parseInt(display.innerHTML), operator);
+  equation.pop();
+  equation.pop();
+});
+
+btnClear.addEventListener("click", () => clearDisplay());
+
+console.log(operators);

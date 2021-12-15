@@ -68,7 +68,9 @@ ul {
   grid-column: 1/5;
 }
 
-.number {
+.number,
+.operator,
+.operatorrr {
   border: 2px solid black;
   border-radius: 5px;
   font-size: 45px;
@@ -80,6 +82,8 @@ ul {
   background-color: rgb(211, 211, 211);
 }
 
-.number:hover {
+.number:hover,
+.operator:hover,
+.operatorrr:hover {
   background-color: rgb(190, 190, 190);
 }
